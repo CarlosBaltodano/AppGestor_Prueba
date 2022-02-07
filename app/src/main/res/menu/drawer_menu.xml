@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_location"
+            android:title="Puntos de Venta"
+            android:checked="true"
+            android:icon="@drawable/ic_location"></item>
+
+        <item android:id="@+id/nav_support"
+            android:title="Soporte"
+            android:icon="@drawable/ic_phone"></item>
+
+        <item android:id="@+id/nav_logout"
+            android:title="Cerrar Sesion"
+            android:icon="@drawable/ic_logout"></item>
+    </group>
+</menu>

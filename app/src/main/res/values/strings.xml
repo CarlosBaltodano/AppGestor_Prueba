@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AppGestor</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="drawer_opem">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+    <string name="uploadImages">Set your image</string>
+    <string name="action_pic">Pictures</string>
+</resources>
