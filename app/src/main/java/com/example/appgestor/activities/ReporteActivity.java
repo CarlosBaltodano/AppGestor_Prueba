@@ -46,7 +46,11 @@ public class ReporteActivity extends AppCompatActivity implements SearchView.OnQ
         mImgBackMenuReporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                Intent intent =new Intent(ReporteActivity.this,MenuActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("nombre",nom);
+                intent.putExtra("correo",correo);
+                startActivity(intent);
             }
         });
 

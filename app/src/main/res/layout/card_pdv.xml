@@ -21,6 +21,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_gravity="center"
             android:gravity="center"
             android:src="@drawable/google_maps"/>
@@ -80,6 +81,7 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight=".0"
+            android:foreground="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_baseline_keyboard_arrow_right_24"/>
 
     </LinearLayout>

@@ -22,7 +22,8 @@
             android:id="@+id/backMenu"
             android:layout_width="35dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_rrow_back"/>
+            android:src="@drawable/ic_rrow_back"
+            android:foreground="?android:attr/selectableItemBackground"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -68,7 +69,7 @@
 
             <ImageButton
                 android:id="@+id/imgBtnPhoto"
-
+                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
@@ -84,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="30dp"
                 android:text="VISITAR"
+                android:foreground="?android:attr/selectableItemBackground"
                 />
         </LinearLayout>
 

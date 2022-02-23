@@ -21,6 +21,7 @@
             android:id="@+id/backMenuUser"
             android:layout_width="35dp"
             android:layout_height="40dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_rrow_back"/>
 
         <TextView
@@ -88,6 +89,7 @@
                 android:src="@drawable/ic_baseline_photo_camera_24"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:padding="0dp"
                 android:scaleType="centerCrop" />
 
@@ -97,6 +99,7 @@
                 android:layout_height="wrap_content"
                 android:text="Agregar Usuario"
                 android:layout_gravity="center"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:padding="5dp"
                 android:layout_margin="10dp"/>
 

@@ -52,7 +52,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="20dp"
-        app:srcCompat="@drawable/ic_add"/>
+        app:srcCompat="@drawable/ic_add"
+        android:foreground="?android:attr/selectableItemBackground"/>
 
 <!--
     <Button

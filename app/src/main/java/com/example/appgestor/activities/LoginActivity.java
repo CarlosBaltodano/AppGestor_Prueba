@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(LoginActivity.this,"Usuario y/o Incorrectos",Toast.LENGTH_SHORT).show();
                }
-
             }
         });
     }
@@ -62,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         DbHelper dbHelper=new DbHelper(LoginActivity.this);
         SQLiteDatabase db=dbHelper.getWritableDatabase();
         if(db!=null){
@@ -70,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
         }else{
             Toast.makeText(LoginActivity.this,"error",Toast.LENGTH_SHORT).show();
         }
-
         SharedPreferences preferences=getSharedPreferences("Datos", Context.MODE_PRIVATE);
         Boolean sesion=preferences.getBoolean("sesion",false);
         String nom=preferences.getString("nombre","NO HAY");
@@ -90,9 +87,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             },2000);}
         }
-
-
-
 
     public void ingresar(String user,String pass){
         DbHelper admin=new DbHelper(LoginActivity.this);
@@ -121,7 +115,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this,"Error"+e.getMessage(),Toast.LENGTH_SHORT).show();
         }
     }
-
     private void guardarDatos(String nombre,String correo,int id){
         SharedPreferences preferences=getSharedPreferences("Datos", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
@@ -131,5 +124,4 @@ public class LoginActivity extends AppCompatActivity {
         editor.putInt("id",id);
         editor.commit();
     }
-
 }

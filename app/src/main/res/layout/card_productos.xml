@@ -43,6 +43,7 @@
                     android:layout_marginBottom="1dp"
                     android:background="#fff"
                     android:gravity="center"
+                    android:inputType="numberDecimal"
                     android:text="32.10" />
 
 
@@ -60,8 +61,8 @@
                     android:layout_marginBottom="1dp"
                     android:background="#fff"
                     android:gravity="center"
-                    android:text="32.12"
-                    android:enabled="false"/>
+                    android:inputType="numberDecimal"
+                    android:text="32.12"/>
 
             </LinearLayout>
 
@@ -79,8 +80,8 @@
                     android:layout_marginBottom="1dp"
                     android:background="#fff"
                     android:gravity="center"
-                    android:text="100"
-                    android:enabled="false"/>
+                    android:inputType="number"
+                    android:text="100"/>
 
             </LinearLayout>
 

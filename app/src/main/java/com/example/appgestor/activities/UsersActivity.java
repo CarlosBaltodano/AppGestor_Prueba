@@ -45,6 +45,7 @@ public class UsersActivity extends AppCompatActivity {
         mEditTextClave = findViewById(R.id.editTextPassword);
         mBtnAddUsers = findViewById(R.id.btnAddUser);
         mImgBtnPhotoUser = findViewById(R.id.imgBtnPhotoUser);
+        mImgBtnPhotoUser.setTag("Photo");
         mLnrLyt = findViewById(R.id.lnrLyt);
         mEditTextNombre.requestFocus();
         mBackMenuUser=findViewById(R.id.backMenuUser);
@@ -66,36 +67,33 @@ public class UsersActivity extends AppCompatActivity {
         mBtnAddUsers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DbUsuarios dbUsuarios = new DbUsuarios(UsersActivity.this);
                 String nom = mEditTextNombre.getText().toString();
                 String correo = mEditTextCorreo.getText().toString().trim();
                 String user = mEditTextUsuario.getText().toString().trim();
                 String pass = mEditTextClave.getText().toString().trim();
 
-                byte[] bytesPP = convertImageViewToByteArray(mImgBtnPhotoUser);
-                if(nom.length()>1 && correo.length()>1 && !nom.isEmpty() && !correo.isEmpty() && !user.isEmpty() && !pass.isEmpty()){
-
-                    long id = dbUsuarios.insertarUsuario(nom, correo, user, pass, bytesPP);
-                    if (id>0) {
-                        Snackbar.make(findViewById(R.id.lnrLyt), "Registro exitoso", Snackbar.LENGTH_LONG)
-                                .setBackgroundTint(getResources().getColor(R.color.sucess)).show();
-                        //Toast.makeText(UsersActivity.this, "REGISTRO EXITOSO", Toast.LENGTH_SHORT).show();
-                        limpiar();
-                    } else {
-                        Snackbar.make(findViewById(R.id.lnrLyt), "No registro", Snackbar.LENGTH_LONG)
-                                .setBackgroundTint(getResources().getColor(R.color.danger)).show();
-                       // Toast.makeText(UsersActivity.this, "ERROR REGISTRO", Toast.LENGTH_SHORT).show();
+                if(!nom.isEmpty() && !correo.isEmpty() && !user.isEmpty() && !pass.isEmpty()){
+                    if(mImgBtnPhotoUser.getTag()=="Photo"){
+                        Toast.makeText(UsersActivity.this, "POR FAVOR AGREGUE UNA FOTO DE PERFIL", Toast.LENGTH_SHORT).show();
+                    }else {
+                        byte[] bytesPP = convertImageViewToByteArray(mImgBtnPhotoUser);
+                        DbUsuarios dbUsuarios = new DbUsuarios(UsersActivity.this);
+                        long id = dbUsuarios.insertarUsuario(nom, correo, user, pass, bytesPP);
+                        if (id > 0) {
+                            Snackbar.make(findViewById(R.id.lnrLyt), "Registro exitoso", Snackbar.LENGTH_LONG)
+                                    .setBackgroundTint(getResources().getColor(R.color.sucess)).show();
+                            limpiar();
+                        } else {
+                            Snackbar.make(findViewById(R.id.lnrLyt), "No registro", Snackbar.LENGTH_LONG)
+                                    .setBackgroundTint(getResources().getColor(R.color.danger)).show();
+                        }
                     }
                 }else{
                     Snackbar.make(findViewById(R.id.lnrLyt), "Por favor , Complete todo los campos", Snackbar.LENGTH_LONG)
                             .setBackgroundTint(getResources().getColor(R.color.danger)).show();
-                    //Toast.makeText(UsersActivity.this, "Por favor , Complete todo los campos", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
-
-
     }
 
     private byte[] convertImageViewToByteArray(ImageView imageView) {
@@ -180,6 +178,7 @@ public class UsersActivity extends AppCompatActivity {
                 if(resultCode == RESULT_OK){
                     Uri selectedImageUri = data.getData();
                     mImgBtnPhotoUser.setImageURI(selectedImageUri);
+                    mImgBtnPhotoUser.setTag("Nueva");
                 }
                 break;
             case 2:
@@ -187,6 +186,7 @@ public class UsersActivity extends AppCompatActivity {
                     Bundle bundle = data.getExtras();
                     Bitmap bitmapImage = (Bitmap) bundle.get("data");
                     mImgBtnPhotoUser.setImageBitmap(bitmapImage);
+                    mImgBtnPhotoUser.setTag("Nueva");
                 }
                 break;
         }

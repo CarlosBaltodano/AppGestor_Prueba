@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,6 +37,8 @@ public class PDVVisitaActivity extends AppCompatActivity {
     LinearLayout mLinearLayout;
     Button mBtnVisit;
     TextView mTextViewNombreVisit,mTextViewDireccionVisit;
+
+    Drawable imagen_antigua;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,28 +52,34 @@ public class PDVVisitaActivity extends AppCompatActivity {
         mTextViewDireccionVisit=findViewById(R.id.textViewDireccionVisit);
         mBtnVisit=findViewById(R.id.btnVisit);
         mImgBtnPhoto=findViewById(R.id.imgBtnPhoto);
+
+        mImgBtnPhoto.setTag("Photo");
+
         mBackMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-        foo(mBtnVisit);
+
         mBtnVisit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                byte[] bytesPP = convertImageViewToByteArray(mImgBtnPhoto);
-                DbPDV dbPDV = new DbPDV(PDVVisitaActivity.this);
-                if (dbPDV.update(id, bytesPP)) {
-                    Intent intent = new Intent(PDVVisitaActivity.this, ReporteActivity.class);
-                    intent.putExtra("nombre", nombre);
-                    intent.putExtra("id", id);
-                    startActivity(intent);
-
-                    Toast.makeText(PDVVisitaActivity.this, "REGISTRO EXITOSO", Toast.LENGTH_SHORT).show();
-                    limpiar();
-                } else {
-                    Toast.makeText(PDVVisitaActivity.this, "ERROR REGISTRO", Toast.LENGTH_SHORT).show();
+                if(mImgBtnPhoto.getTag()=="Photo"){
+                    Toast.makeText(PDVVisitaActivity.this, "POR FAVOR AGREGUE UNA IMAGEN", Toast.LENGTH_SHORT).show();
+                }else {
+                    byte[] bytesPP = convertImageViewToByteArray(mImgBtnPhoto);
+                    DbPDV dbPDV = new DbPDV(PDVVisitaActivity.this);
+                    if (dbPDV.update(id, bytesPP)) {
+                        Intent intent = new Intent(PDVVisitaActivity.this, ReporteActivity.class);
+                        intent.putExtra("nombre", nombre);
+                        intent.putExtra("id", id);
+                        startActivity(intent);
+                        // Toast.makeText(PDVVisitaActivity.this, "REGISTRO CREADO", Toast.LENGTH_SHORT).show();
+                        limpiar();
+                    } else {
+                        Toast.makeText(PDVVisitaActivity.this, "ERROR REGISTRO", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -82,6 +91,20 @@ public class PDVVisitaActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Bundle bundle=this.getIntent().getExtras();
+        id=bundle.getInt("id");
+        codigo=bundle.getString("codigo");
+        nombre=bundle.getString("nombre");
+        direccion=bundle.getString("direccion");
+        mTextViewNombreVisit.setText(nombre);
+        mTextViewDireccionVisit.setText(direccion.toUpperCase());
+        imagen_antigua = mImgBtnPhoto.getDrawable();
 
     }
 
@@ -148,18 +171,7 @@ public class PDVVisitaActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Bundle bundle=this.getIntent().getExtras();
-        id=bundle.getInt("id");
-        codigo=bundle.getString("codigo");
-        nombre=bundle.getString("nombre");
-        direccion=bundle.getString("direccion");
-        mTextViewNombreVisit.setText(nombre);
-        mTextViewDireccionVisit.setText(direccion.toUpperCase());
 
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -170,6 +182,7 @@ public class PDVVisitaActivity extends AppCompatActivity {
                 if(resultCode == RESULT_OK){
                     Uri selectedImageUri = data.getData();
                     mImgBtnPhoto.setImageURI(selectedImageUri);
+                    mImgBtnPhoto.setTag("Nueva");
                 }
                 break;
             case 2:
@@ -177,6 +190,7 @@ public class PDVVisitaActivity extends AppCompatActivity {
                     Bundle bundle = data.getExtras();
                     Bitmap bitmapImage = (Bitmap) bundle.get("data");
                     mImgBtnPhoto.setImageBitmap(bitmapImage);
+                    mImgBtnPhoto.setTag("Nueva");
                 }
                 break;
         }
@@ -186,13 +200,4 @@ public class PDVVisitaActivity extends AppCompatActivity {
         mImgBtnPhoto.setImageResource(R.drawable.ic_baseline_photo_camera_24);
     }
 
-    public void foo(View v){
-        if (v.getId() == R.id.imgBtnPhoto){
-            Toast.makeText(PDVVisitaActivity.this, "Presiono", Toast.LENGTH_SHORT).show();
-        }else if (v.getId() == R.id.btnVisit){
-
-        }else{
-            Toast.makeText(PDVVisitaActivity.this, "Por Favor, Tome una foto", Toast.LENGTH_SHORT).show();
-        }
-    }
 }

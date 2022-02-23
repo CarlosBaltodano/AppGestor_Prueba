@@ -1,17 +1,22 @@
 package com.example.appgestor.activities;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -88,9 +93,11 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private void showUser(int id){
         DbUsuarios dbUsuarios = new DbUsuarios(MenuActivity.this);
         User user = dbUsuarios.getUser(id);
-        if(user != null){
+        if(user.getImage() != null){
             Bitmap bitmap = convertByteArrayToBitmap(user.getImage());
             mImgFotoUser.setImageBitmap(bitmap);
+        }else{
+
         }
     }
     private Bitmap convertByteArrayToBitmap(byte[] bytes){
@@ -129,13 +136,29 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 ft.replace(R.id.content,new SupportFragment()).commit();
                 break;
             case R.id.nav_logout:
-                SharedPreferences preferences=getSharedPreferences("Datos", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor=preferences.edit();
-                editor.putBoolean("sesion",false);
-                editor.commit();
-                Intent intent=new Intent(MenuActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                AlertDialog.Builder alerta=new AlertDialog.Builder(MenuActivity.this);
+                alerta.setMessage("\n                ¿ Desea Cerrar Sesion ?")
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                SharedPreferences preferences=getSharedPreferences("Datos", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor=preferences.edit();
+                                editor.putBoolean("sesion",false);
+                                editor.commit();
+                                Intent intent=new Intent(MenuActivity.this,LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertDialog titulo=alerta.create();
+                titulo.setTitle("CERRAR SESION");
+                titulo.setIcon(R.drawable.ic_logout);
+                titulo.show();
                 break;
         }
         setTitle(item.getTitle());
@@ -172,4 +195,29 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            finish();
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Por favor, haga clic en atras de nuevo para salir.", Toast.LENGTH_SHORT).show();
+
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+
+            }
+        }, 2000);
+    }
 }
