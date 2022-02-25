@@ -37,6 +37,22 @@ public class DbUsuarios extends DbHelper{
         return  id;
     }
 
+    public boolean updateUser(int id,String nombre,String correo){
+        try{
+            ContentValues cv = new ContentValues();
+            cv.put("nombre",nombre);
+            cv.put("correo",correo);
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.update(TABLE_USERS,cv, "id=?", new String[]{ String.valueOf(id) } );
+            db.close();
+            return true;
+        }
+        catch (Exception e){
+            e.getMessage();
+            return false;
+        }
+    }
+
     public Cursor ConsultarUsuPass(String usu,String pass) throws SQLException{
         Cursor mcursor=null;
         mcursor=this.getReadableDatabase().query("usuarios",
@@ -64,4 +80,6 @@ public class DbUsuarios extends DbHelper{
             return null;
         }
     }
+
+
 }

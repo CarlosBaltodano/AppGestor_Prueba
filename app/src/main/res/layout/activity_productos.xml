@@ -48,7 +48,7 @@
             android:padding="30dp">
 
             <EditText
-                android:id="@+id/editTextNombre"
+                android:id="@+id/editTextNombreProducto"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Nombre"
@@ -56,7 +56,7 @@
                 android:inputType="text"/>
 
             <EditText
-                android:id="@+id/editTextCosto"
+                android:id="@+id/editTextCostoProducto"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Costo"
@@ -64,7 +64,7 @@
                 android:inputType="numberDecimal"/>
 
             <EditText
-                android:id="@+id/editTextMayor"
+                android:id="@+id/editTextMayorProducto"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="P.Rvta Mayor"
@@ -72,7 +72,7 @@
                 android:inputType="numberDecimal"/>
 
             <EditText
-                android:id="@+id/editTextStock"
+                android:id="@+id/editTextStockProducto"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Stock"

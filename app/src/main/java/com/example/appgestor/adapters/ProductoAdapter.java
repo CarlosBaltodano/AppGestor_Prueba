@@ -1,15 +1,19 @@
 package com.example.appgestor.adapters;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appgestor.R;
+import com.example.appgestor.bd.DbProductos;
 import com.example.appgestor.entities.Producto;
 
 import java.util.ArrayList;
@@ -44,6 +48,9 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         holder.mEditTextMayorProd.setText(p_mayor);
         holder.mEditTextStockProd.setText(stock);
         holder.id=listaProducto.get(position).getId();
+
+
+
         }
 
     public void filtrado(String txtBuscar){
@@ -84,20 +91,99 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
             mEditTextMayorProd=itemView.findViewById(R.id.editTextMayorProd);
             mEditTextStockProd=itemView.findViewById(R.id.editTextStockProd);
 
-            mEditTextCostoProd.setOnClickListener(new View.OnClickListener() {
+            mEditTextCostoProd.setTag("app");
+            mEditTextCostoProd.setText("100");
+            mEditTextCostoProd.setTag(null);
+
+            mEditTextMayorProd.setTag("app");
+            mEditTextMayorProd.setText("100");
+            mEditTextMayorProd.setTag(null);
+
+            mEditTextStockProd.setTag("app");
+            mEditTextStockProd.setText("100");
+            mEditTextStockProd.setTag(null);
+
+            mEditTextStockProd.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void onClick(View v) {
-                    //mEditTextCostoProd.setEnabled(true);
-                    //Toast.makeText(v.getContext(), ""+id,Toast.LENGTH_SHORT).show();
-                    //double costo=Double.parseDouble(mEditTextCostoProd.getText().toString().trim());
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (mEditTextStockProd.getTag() == null) {
+                        if(id==0){
+                        }else{
+                            DbProductos dbProductos=new DbProductos(itemView.getContext());
+                            dbProductos.updateStock(id,Double.parseDouble(mEditTextStockProd.getText().toString()));
+                        }
+                    } else {
+                        Toast.makeText(itemView.getContext(),"Modificado por el programa",Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
-            mEditTextMayorProd.setOnClickListener(new View.OnClickListener() {
+
+
+            mEditTextMayorProd.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void onClick(View v) {
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (mEditTextMayorProd.getTag() == null) {
+                        if(id==0){
+                        }else{
+                            DbProductos dbProductos=new DbProductos(itemView.getContext());
+                            dbProductos.updateMayor(id,Double.parseDouble(mEditTextMayorProd.getText().toString()));
+                        }
+                    } else {
+                        Toast.makeText(itemView.getContext(),"Modificado por el programa",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+            mEditTextCostoProd.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    //diferenciar quien ha sido
+                    if (mEditTextCostoProd.getTag() == null) {
+                        if(id==0){
+
+                        }else{
+                            DbProductos dbProductos=new DbProductos(itemView.getContext());
+                            dbProductos.updateCosto(id,Double.parseDouble(mEditTextCostoProd.getText().toString()));
+                            //Toast.makeText(itemView.getContext(),""+id,Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        //Modificado por el programa
+                        Toast.makeText(itemView.getContext(),"Modificado por el programa",Toast.LENGTH_SHORT).show();
+                    }
 
                 }
             });
+
 
         }
     }

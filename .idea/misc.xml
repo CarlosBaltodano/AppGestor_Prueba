@@ -10,6 +10,7 @@
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/drawable/ic_baseline_keyboard_arrow_right_24.xml" value="0.147" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1545" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/drawable/ic_baseline_photo_camera_24.xml" value="0.1545" />
+        <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/drawable/ic_edit.xml" value="0.147" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1555" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/drawable/ic_person.xml" value="0.1545" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/drawable/progress_dialog.xml" value="0.1545" />
@@ -25,16 +26,19 @@
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/layout/card_medico.xml" value="0.25" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/layout/card_pdv.xml" value="0.25" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/layout/card_productos.xml" value="0.22" />
+        <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/layout/edit_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/layout/fragment_location.xml" value="0.22" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/layout/fragment_support.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/layout/nav_header.xml" value="0.22" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/layout/progress_dialog.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/layout/simple_spinner_spn.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/layout/toolbar.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/layout/toolbar_back.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/layout/toolbarback.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/menu/drawer_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/menu/options_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Beto/AndroidStudioProjects/AppGestor/app/src/main/res/menu/top_app_bar.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Beto/AppData/Local/Android/Sdk/platforms/android-30/data/res/layout/simple_spinner_item.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

@@ -75,4 +75,34 @@ public class DbProductos extends DbHelper{
             return false;
         }
     }
+
+    public boolean updateMayor(int id,double mayor){
+        try{
+            ContentValues cv = new ContentValues();
+            cv.put("mayor",mayor);
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.update("productos", cv, "id=?", new String[]{ String.valueOf(id) } );
+            db.close();
+            return true;
+        }
+        catch (Exception e){
+            e.getMessage();
+            return false;
+        }
+    }
+
+    public boolean updateStock(int id,double stock){
+        try{
+            ContentValues cv = new ContentValues();
+            cv.put("stock",stock);
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.update("productos", cv, "id=?", new String[]{ String.valueOf(id) } );
+            db.close();
+            return true;
+        }
+        catch (Exception e){
+            e.getMessage();
+            return false;
+        }
+    }
 }

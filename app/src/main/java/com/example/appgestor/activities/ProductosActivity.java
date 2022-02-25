@@ -1,7 +1,6 @@
 package com.example.appgestor.activities;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,10 +32,10 @@ public class ProductosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productos);
         mBackMenuProd=findViewById(R.id.backMenuProd);
-        mEditTextNombre=findViewById(R.id.editTextNombre);
-        mEditTextCosto=findViewById(R.id.editTextCosto);
-        mEditTextMayor=findViewById(R.id.editTextMayor);
-        mEditTextStock=findViewById(R.id.editTextStock);
+        mEditTextNombre=findViewById(R.id.editTextNombreProducto);
+        mEditTextCosto=findViewById(R.id.editTextCostoProducto);
+        mEditTextMayor=findViewById(R.id.editTextMayorProducto);
+        mEditTextStock=findViewById(R.id.editTextStockProducto);
         mSpnProducto=findViewById(R.id.spnProducto);
         mBtnAddProd=findViewById(R.id.btnAddProducto);
 
@@ -44,24 +43,32 @@ public class ProductosActivity extends AppCompatActivity {
         mBtnAddProd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nom=mEditTextNombre.getText().toString();
-                double costo=Double.parseDouble(mEditTextNombre.getText().toString());
-                double mayor=Double.parseDouble(mEditTextNombre.getText().toString());
-                int stock=Integer.parseInt(mEditTextNombre.getText().toString());
-                int idspn=(int)mSpnProducto.getSelectedItemId();
-                try {
+                String nombre=mEditTextNombre.getText().toString().trim();
+                String cos=mEditTextCosto.getText().toString();
+                String may=mEditTextMayor.getText().toString();
+                String sto=mEditTextStock.getText().toString();
+                int spn=mSpnProducto.getSelectedItemPosition();
+                //Toast.makeText(ProductosActivity.this, ""+spn, Toast.LENGTH_SHORT).show();
+
+                if(!nombre.isEmpty() && !cos.isEmpty() && !may.isEmpty() && !sto.isEmpty() && spn!=0){
+
+                    double costo=Double.valueOf(mEditTextCosto.getText().toString());
+                    double mayor=Double.parseDouble(mEditTextMayor.getText().toString());
+                    int stock=Integer.parseInt(mEditTextStock.getText().toString());
+                    int idspn=mSpnProducto.getSelectedItemPosition();
                     DbProductos dbProductos = new DbProductos(ProductosActivity.this);
-                    long id=dbProductos.insertarProducto(1,"Galletas",10.99,10.89,1);
+
+                    long id=dbProductos.insertarProducto(idspn,nombre,costo,mayor,stock);
                     if (id > 0) {
                         Toast.makeText(ProductosActivity.this, "REGISTRO PRODUCTO EXITOSO", Toast.LENGTH_SHORT).show();
                         limpiar();
                     } else {
                         Toast.makeText(ProductosActivity.this, "ERROR REGISTRO PRODUCTO", Toast.LENGTH_SHORT).show();
                     }
-                }catch (Exception e){
-                    Log.wtf("hola",e);
-                }
 
+                }else{
+                    Toast.makeText(ProductosActivity.this, "Por Favor complete todo los datos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -75,18 +82,19 @@ public class ProductosActivity extends AppCompatActivity {
     }
 
     private void limpiar() {
+        mEditTextNombre.requestFocus();
         mEditTextStock.setText("");
         mEditTextMayor.setText("");
         mEditTextNombre.setText("");
         mEditTextCosto.setText("");
-        //mSpnProducto.setSelection(0);
+        mSpnProducto.setSelection(0);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         obtenerLista();
-        ArrayAdapter<CharSequence> adaptador=new ArrayAdapter(this, android.R.layout.simple_spinner_item,listaPDV);
+        ArrayAdapter<CharSequence> adaptador=new ArrayAdapter(this,R.layout.simple_spinner_spn,listaPDV);
         mSpnProducto.setAdapter(adaptador);
     }
 
